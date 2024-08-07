@@ -4,15 +4,18 @@
 [![Swift](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fpointfreeco%2Fswift-composable-architecture%2Fbadge%3Ftype%3Dswift-versions)](https://swift.org)
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fpointfreeco%2Fswift-composable-architecture%2Fbadge%3Ftype%3Dplatforms)](https://developer.apple.com)
 
-The Base Composable Architecture (TCA, for short) is a library heavily inspired by [Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) for building applications in a consistent 
+The Base Composable Architecture (TCA, for short) is a library heavily inspired by [Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) for building applications in a consistent
 and understandable way, with composition, testing, and ergonomics in mind while being considerably lighter than the original library and offering the complete flexibility for it to get more easily adopted cross wide variety of projects.
-This library allows developers to integrate their preferred third-party tools for optimal performance without being restricted to predefined tools. For example for handling Dependency Injection ([Factory](https://github.com/hmlongco/Factory) for DI).
+<br><br>
+This library allows developers to integrate their preferred third-party tools for optimal performance without being restricted to predefined tools. For example for handling Dependency Injection ([Factory](https://github.com/hmlongco/Factory) for DI).<br>
 It can be used in SwiftUI, UIKit, and more, and on any Apple platform (iOS, macOS, visionOS, tvOS, and watchOS).
 
 * [What is the Composable Architecture?](#what-is-the-composable-architecture)
-* [TCA Template Installation](#TCA-Template-Installation)
-* [Basic usage](#basic-usage)
-
+* [Usage](#usage)
+* [TCA Template Installation](#tca-template-installation)
+* [Installation](#installation)
+* [Example](#example)
+<br>
 
 ## What is the Composable Architecture?
 
@@ -41,24 +44,9 @@ day-to-day when building applications, such as:
 * **Ergonomics**
   <br> How to accomplish all of the above in a simple API with as few concepts and moving parts as 
   possible.
+<br>
 
-
-## TCA Template Installation
-This library includes a custom Xcode template that simplifies feature development with TCA. The template automatically generates the necessary `View` and `Reducer` files, complete with boilerplate code and implementation comments.
-
-
-All the Xcode custom template files are located in ~/Library/Developer/Xcode/Templates/ and grouped into sections by folder name. Create a folder with name `Custom Templates` manually or by running the following command from the terminal:
-
-```
-mkdir ~/Library/Developer/Xcode/Templates/Custom Templates
-```
-
-Now drag and drop the `TCA.xctemplate` that included with the repo under the `XcodeTemplate` folder to the `Custom Templates` directory. Now the TCA template can be selected from File Templates
-
-![Gif to be added](assets/tca_template.gif)
-
-
-## Basic Usage
+## Usage
 
 To build a feature using the Composable Architecture you define some types and values that model 
 your domain:
@@ -76,18 +64,64 @@ so that you can update UI.
 
 The benefits of doing this are that you will instantly unlock testability of your feature, and you 
 will be able to break large, complex features into smaller domains that can be glued together.
+<br>
 
-### Basic Example
+![Diagram](https://github.com/user-attachments/assets/a35b9fb3-aec7-4457-9ecd-9eb40af04521)
+
+<br>
+
+## TCA Template Installation
+This library includes a custom Xcode template that simplifies feature development with TCA. The template automatically generates the necessary `View` and `Reducer` files, complete with boilerplate code and implementation comments.
+
+
+All the Xcode custom template files are located in ~/Library/Developer/Xcode/Templates/ and grouped into sections by folder name. Create a folder with name `Custom Templates` manually or by running the following command from the terminal:
+
+```
+mkdir ~/Library/Developer/Xcode/Templates/Custom Templates
+```
+<br>
+Now drag and drop the `TCA.xctemplate` that included with the repo under the `XcodeTemplate` folder to the `Custom Templates` directory. Now the TCA template can be selected from File Templates.
+<img width="719" alt="image" src="https://github.com/user-attachments/assets/0ec0bc7d-dcaf-4274-9f1d-b870f2cb87a1">
+<br>
+Select `Next` and enter the name of your Feature on this page.
+<img width="722" alt="image" src="https://github.com/user-attachments/assets/8e2b34fd-da2d-408c-9f4a-96181b96e7cb">
+<br>
+After selecting `Next` again, make sure to enter the same value (for the feature file) as you've entered on the previous step. 
+<img width="793" alt="image" src="https://github.com/user-attachments/assets/c81d1ef3-8a56-4850-ae98-4cab8e428797">
+<br>
+Now you'll see the two new files added to your project.
+
+
+
+
+![Gif to be added](assets/tca_template.gif)
+<br>
+## Installation
+
+You can add **BaseComposableArchitecture** to an Xcode project by adding it as a package dependency.
+
+  1. From the **File** menu, select **Add Package Dependencies...**
+  2. Enter "[https://github.com/pointfreeco/swift-composable-architecture](https://github.com/maamjadi/Swift-Composable-Architecture)" into the package 
+     repository URL text field
+  3. Depending on how your project is structured:
+      - If you have a single application target that needs access to the library, then add 
+        **BaseComposableArchitecture** directly to your application.
+      - If you want to use this library from multiple Xcode targets, or mix Xcode targets and SPM 
+        targets, you must create a shared framework that depends on **BaseComposableArchitecture** and 
+        then depend on that framework in all of your targets..
+<br>
+
+## Example
 
 As a basic example, consider a UI that shows a number along with "+" and "−" buttons that increment 
 and decrement the number. To make things interesting, suppose there is also a button that when 
 tapped makes an API request to fetch a random fact about that number and displays it in the view.
 
 To implement this feature we create a new type that will house the domain and behavior of the 
-feature, and it will be annotated with the `@Reducer` macro:
+feature, and it will inherite the `Reducer` protocol:
 
 ```swift
-import ComposableArchitecture
+import BaseComposableArchitecture
 
 struct FeatureReducer: Reducer {
 }
@@ -287,7 +321,15 @@ us a consistent manner to apply state mutations, instead of scattering logic in 
 objects and in various action closures of UI components. It also gives us a concise way of 
 expressing side effects. And we can immediately test this logic, including the effects, without 
 doing much additional work.
+<br>
 
+## Other libraries
+
+The Composable Architecture was built on a foundation of ideas started by other libraries, in 
+particular [Elm](https://elm-lang.org) and [Redux](https://redux.js.org/).
+<br>
+For optimal results, it is recommended to use this library in conjunction with the [Factory](https://github.com/hmlongco/Factory) Dependency Injection library.
+<br>
 
 ## Acknowledgments
 
@@ -296,3 +338,7 @@ doing much additional work.
 * [iOS Project Best Practices and Tools](https://medium.com/@piotr.gorzelany/ios-project-best-practices-and-tools-c46135b8116d)
 * [Development, Staging and Production Configs in Xcode](https://medium.com/better-programming/how-to-create-development-staging-and-production-configs-in-xcode-ec58b2cc1df4)
 * [iOS Build Management using Custom Build Scheme](https://www.talentica.com/blogs/ios-build-management-using-custom-build-scheme/)
+
+## License
+
+This library is released under the MIT license. See [LICENSE](LICENSE) for details.
