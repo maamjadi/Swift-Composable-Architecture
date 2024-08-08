@@ -90,18 +90,14 @@ After selecting `Next` again, make sure to enter the same value (for the feature
 <img width="793" alt="image" src="https://github.com/user-attachments/assets/c81d1ef3-8a56-4850-ae98-4cab8e428797">
 <br>
 Now you'll see the two new files added to your project.
-
-
-
-
-![Gif to be added](assets/tca_template.gif)
 <br>
+
 ## Installation
 
 You can add **BaseComposableArchitecture** to an Xcode project by adding it as a package dependency.
 
   1. From the **File** menu, select **Add Package Dependencies...**
-  2. Enter "[https://github.com/pointfreeco/swift-composable-architecture](https://github.com/maamjadi/Swift-Composable-Architecture)" into the package 
+  2. Enter "[https://github.com/maamjadi/Swift-Composable-Architecture](https://github.com/maamjadi/Swift-Composable-Architecture)" into the package 
      repository URL text field
   3. Depending on how your project is structured:
       - If you have a single application target that needs access to the library, then add 
@@ -253,6 +249,8 @@ the store. The code is a bit longer than the SwiftUI version, so we have collaps
   <summary>Click to expand!</summary>
 
   ```swift
+  import BaseComposableArchitecture
+
   class FeatureViewController: UIViewController {
     let store: StoreOf<FeatureReducer>
 
@@ -301,7 +299,7 @@ store. This can be done by specifying the initial state to start the application
 the reducer that will power the application:
 
 ```swift
-import ComposableArchitecture
+import BaseComposableArchitecture
 
 @main
 struct MyApp: App {
