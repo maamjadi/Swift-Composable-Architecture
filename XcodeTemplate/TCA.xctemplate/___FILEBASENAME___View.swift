@@ -26,5 +26,6 @@ struct ___FILEBASENAME___: View {
 // MARK: - Preview
 
 #Preview {
-    ___FILEBASENAME___(store: Store(initialState: ___VARIABLE_featureName:identifier___Reducer.State(), reducer: ___VARIABLE_featureName:identifier___Reducer()))
+    ___FILEBASENAME___(store: Store(initialState: ___VARIABLE_featureName:identifier___Reducer.State(),
+                                    reducer: ___VARIABLE_featureName:identifier___Reducer()))
 }
