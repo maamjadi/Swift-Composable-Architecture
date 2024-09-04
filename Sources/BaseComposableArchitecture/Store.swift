@@ -40,7 +40,7 @@ public final class Store<State, Action>: StoreType {
     // Turns an effect into one that is capable of being canceled.
     private var cancellables: Set<AnyCancellable> = []
 
-    @Published private(set) public var state: State
+    @Published public var state: State
 
     required public init<R: Reducer>(initialState: R.State,
                                      reducer: R) where R.State == State, R.Action == Action {
