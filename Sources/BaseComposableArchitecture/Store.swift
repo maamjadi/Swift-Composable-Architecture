@@ -28,7 +28,7 @@ fileprivate typealias StoreType = ObservableObject & Dispatching
 /// Defines an instance which can dispatch events
 public protocol Dispatching {
     associatedtype Action
-/// Initializes an effect that immediately emits the action passed in.
+    /// Initializes an effect that immediately emits the action passed in.
     func send(_ action: Action)
 }
 
@@ -50,6 +50,7 @@ public final class Store<State, Action>: StoreType {
 
     public func send(_ action: Action) {
         let effect = reducer.reduce(into: &state, action: action)
+
         switch effect.operation {
         case .publisher(let publisher):
             publisher
@@ -57,7 +58,15 @@ public final class Store<State, Action>: StoreType {
                 .receive(on: DispatchQueue.main)
                 .sink(receiveValue: send)
                 .store(in: &cancellables)
-        default:
+
+        case .run(let priority, let operation):
+            Task(priority: priority) {
+                await operation(Send(send: { [weak self] action in
+                    self?.send(action)
+                }))
+            }
+
+        case .none:
             break
         }
     }
